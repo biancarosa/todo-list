@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+    command: gunicorn app.main:app --workers=4 --bind 0.0.0.0:5000 --reload
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
