@@ -1,6 +1,6 @@
 # todo-list
 
-This is a todo-list app.
+This is yet another todo-list app.
 
 The application relies on the app folder, being the `main.py` its entrypoint.
 
