@@ -1,6 +1,6 @@
-# flask-app
+# todo-list
 
-This is a example flask app that can be used as a template repository for new flask apps.
+This is a todo-list app.
 
 The application relies on the app folder, being the `main.py` its entrypoint.
 
