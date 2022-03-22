@@ -1,7 +1,7 @@
 """app.tasks.tasks
 
 Module that deals with Tasks route."""
-from flask import jsonify
+from flask import jsonify, request
 from app.tasks import models, repository
 
 tasks_repository = repository.TaskRepository()
@@ -11,7 +11,7 @@ def create():
     json = request.get_json()
     task = models.Task(json.get('description'))
     tasks_repository.save(task)
-    return jsonify(task)
+    return jsonify(dict(task))
 
 def list():
     """Returns the task list."""

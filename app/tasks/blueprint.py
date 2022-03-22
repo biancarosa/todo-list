@@ -2,7 +2,7 @@
 
 Module taht deals with Blueprint-related stuff."""
 from flask import Blueprint
-from app.tasks import tasks
+from app.tasks import tasks, models
 
 def create_blueprint():
     """Creates a Blueprint"""

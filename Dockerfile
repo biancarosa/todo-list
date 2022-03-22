@@ -1,6 +1,6 @@
 FROM python:3.9.0-alpine
 
-RUN apk add --no-cache --update git make gcc python3-dev musl-dev && \
+RUN apk add --no-cache --update git make gcc python3-dev musl-dev build-base && \
     set -ex && \
     pip install --no-cache-dir pipenv==10.1.2
 
