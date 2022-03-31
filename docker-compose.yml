@@ -12,7 +12,7 @@ services:
   # Got this from https://medium.com/@TimvanBaarsen/how-to-run-an-elasticsearch-7-x-single-node-cluster-for-local-development-using-docker-compose-2b7ab73d8b82
   # Elasticsearch Docker Images: https://www.docker.elastic.co/
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.2
     container_name: elasticsearch
     environment:
       - xpack.security.enabled=false
