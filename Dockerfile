@@ -1,4 +1,4 @@
-FROM python:3.10.3-alpine
+FROM python:3.10.4-alpine
 
 RUN apk add --no-cache --update git make gcc python3-dev musl-dev build-base && \
     set -ex && \
