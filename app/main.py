@@ -19,4 +19,7 @@ from app.tasks import blueprint as tasks_blueprint
 app.register_blueprint(health_check_blueprint.create_blueprint())
 app.register_blueprint(tasks_blueprint.create_blueprint())
 
-db.create_all()
+try:
+    db.create_all()
+except:
+    print('Schema created already. Skipping.')
