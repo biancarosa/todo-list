@@ -20,4 +20,6 @@ class Task(db.Model):
         self.description = description
     
     def __iter__(self):
+        yield 'id', self.id
         yield 'description', self.description
+        yield 'status', self.status.name

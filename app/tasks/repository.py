@@ -12,6 +12,9 @@ class TaskRepository:
         db.session.commit()
         return task
     
-    def list(self):
-        return models.Task.query.limit(self.DEFAULT_LIMIT).all()
+    def get(self, id):
+        return db.session.query(models.Task).get(id)
 
+    
+    def list(self):
+        return models.Task.query.order_by(models.Task.id.asc()).limit(self.DEFAULT_LIMIT).all()
