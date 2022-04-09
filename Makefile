@@ -17,3 +17,9 @@ integration-test:
 
 lint:
 	pipenv run pylint app
+
+backup-db:
+	docker compose exec -T db pg_dumpall -c -U todolist_app > dump.sql
+
+restore-db:
+	cat dump.sql | docker compose exec -i db psql -U todolist_app
