@@ -4,10 +4,11 @@ Module that starts the Flask application
 """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # pylint: disable=C0103
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:////tmp/test.db")
 db = SQLAlchemy(app)
 
 from app.healthcheck import blueprint as health_check_blueprint
