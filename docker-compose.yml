@@ -12,6 +12,7 @@ services:
       - 5005:5000
     environment:
       DATABASE_URL: "postgresql://todolist_app:todolist_app@db:5432/todolist_app"
+      LOG_LEVEL: "DEBUG"
   db:
     image: postgres:14-alpine
     volumes:
