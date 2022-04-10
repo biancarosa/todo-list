@@ -1,6 +1,8 @@
 """app.tasks.tasks
 
 Module that deals with Tasks route."""
+import logging
+
 from flask import jsonify, request
 from app.tasks import models, repository
 
@@ -15,7 +17,9 @@ def create():
 
 def list():
     """Returns the task list."""
+    logger = logging.getLogger(__name__)
     tasks = tasks_repository.list()
+    logger.info(f"Found len({tasks}) tasks")
     return jsonify({
         "data": [dict(task) for task in tasks]
     })

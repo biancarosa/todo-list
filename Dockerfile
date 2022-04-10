@@ -1,14 +1,9 @@
 FROM python:3.10.4-alpine
 
-RUN apk add --no-cache --update git make gcc python3-dev musl-dev build-base && \
-    set -ex && \
-    pip install --no-cache-dir pipenv==10.1.2
+RUN apk add --no-cache --update git make gcc python3-dev musl-dev build-base
+ADD requirements.txt requirements.txt
 
-ADD Pipfile Pipfile
-ADD Pipfile.lock Pipfile.lock
-
-RUN set -ex && \
-    pipenv install --dev --system --deploy
+RUN pip install -r requirements.txt
 
 ADD app app
 

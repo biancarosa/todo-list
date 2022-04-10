@@ -13,6 +13,8 @@ pytest-cov = "*"
 flask = "==2.1.1"
 gunicorn = "==20.1.0"
 flask-sqlalchemy = "*"
+newrelic = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.9"

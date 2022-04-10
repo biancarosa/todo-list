@@ -3,7 +3,7 @@ init:
 	pipenv install --dev
 
 run:
-	pipenv run gunicorn app.main:app --workers=4 --bind 0.0.0.0:5000 --reload
+	pipenv run NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program gunicorn app.main:app --workers=4 --bind 0.0.0.0:5000 --reload
 
 test:
 	pipenv run pytest tests/unit
@@ -23,3 +23,6 @@ backup-db:
 
 restore-db:
 	cat dump.sql | docker compose exec -i db psql -U todolist_app
+
+requirements:
+	pipenv lock -r > requirements.txt
