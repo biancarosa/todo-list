@@ -10,11 +10,12 @@ pytest = "*"
 pytest-cov = "*"
 
 [packages]
-flask = "==2.1.1"
+flask = {extras = ["async"], version = "*"}
 gunicorn = "==20.1.0"
 flask-sqlalchemy = "*"
 newrelic = "*"
 psycopg2-binary = "*"
+asyncio = "*"
 
 [requires]
 python_version = "3.9"
