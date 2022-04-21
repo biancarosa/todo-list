@@ -4,12 +4,21 @@ Module that starts the Flask application
 """
 import os
 import logging
+import newrelic
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from app.logger import init_logger
 
+@newrelic.agent.function_trace(name="populate_db")
+def populate_db():
+    from app.tasks import models, repository
+    tasks_repository = repository.TaskRepository()
+    for i in range(0,15000):
+        task = models.Task(f"Task {i}")
+        tasks_repository.save(task)
+        
 init_logger()
 logger = logging.getLogger(__name__)
 
@@ -29,5 +38,6 @@ app.register_blueprint(tasks_blueprint.create_blueprint())
 try:
     logger.info('Creating db schema.')
     db.create_all()
-except:
-    logger.info('Schema created already. Skipping.')
+    populate_db()
+except Exception as e:
+    logger.error(e)
