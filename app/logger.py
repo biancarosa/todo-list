@@ -4,19 +4,14 @@ import logging
 import os
 import sys
 
-import newrelic
-from newrelic.agent import NewRelicContextFormatter
-from newrelic.api.log import NewRelicLogHandler
 
 class TodoListLogger(logging.Logger):
 
   def _log(self, level, msg, args, exc_info=None, extra=None):
     if extra is None:
         extra = {}
-    extra['service'] = "todolist-app"
     super(TodoListLogger, self)._log(level, msg, args, exc_info, extra)
 
-@newrelic.agent.function_trace(name="init_logger")
 def init_logger():
     logging.setLoggerClass(TodoListLogger)
     logging.getLogger().setLevel(logging.NOTSET)
@@ -30,9 +25,6 @@ def init_logger():
     ch.setLevel(level)
     ch.setFormatter(formatter)
     logging.getLogger().addHandler(ch)
-
-    new_relic_handler = NewRelicLogHandler(level=level, host="log-api.newrelic.com", license_key=os.getenv('NEW_RELIC_LICENSE_KEY'))
-    logging.getLogger().addHandler(new_relic_handler)
 
 
     logger = logging.getLogger(__name__)        

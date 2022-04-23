@@ -13,7 +13,7 @@ class TaskStatus(enum.Enum):
 class Task(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    description = db.Column(db.String)
+    description = db.Column(db.String, nullable=False)
     status = db.Column(db.Enum(TaskStatus), default=TaskStatus.TO_DO)
 
     def __init__(self, description):

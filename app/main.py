@@ -11,7 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.logger import init_logger
 
-@newrelic.agent.function_trace(name="populate_db")
 def populate_db():
     from app.tasks import models, repository
     tasks_repository = repository.TaskRepository()
