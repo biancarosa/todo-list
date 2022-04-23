@@ -11,10 +11,13 @@ logger = logging.getLogger(__name__)
 
 def create():
     """Creates tasks."""
-    json = request.get_json()
-    task = models.Task(json.get('description'))
-    tasks_repository.save(task)
-    return jsonify(dict(task))
+    try:
+        json = request.get_json()
+        task = models.Task(json.get('description'))
+        tasks_repository.save(task)
+        return jsonify(dict(task))
+    except:
+        raise Exception("Could not create task")
 
 def list():
     """Returns the task list."""
