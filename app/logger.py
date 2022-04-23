@@ -4,6 +4,7 @@ import logging
 import os
 import sys
 
+from newrelic.api.log import NewRelicLogHandler
 
 class TodoListLogger(logging.Logger):
 
@@ -26,6 +27,8 @@ def init_logger():
     ch.setFormatter(formatter)
     logging.getLogger().addHandler(ch)
 
-
+    new_relic_handler = NewRelicLogHandler(level=level, host="log-api.newrelic.com", license_key=os.getenv('NEW_RELIC_LICENSE_KEY'))
+    logging.getLogger().addHandler(new_relic_handler)
+    
     logger = logging.getLogger(__name__)        
     logger.debug("Logger initialized")
