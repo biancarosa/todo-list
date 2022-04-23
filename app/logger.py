@@ -29,6 +29,3 @@ def init_logger():
 
     new_relic_handler = NewRelicLogHandler(level=level, host="log-api.newrelic.com", license_key=os.getenv('NEW_RELIC_LICENSE_KEY'))
     logging.getLogger().addHandler(new_relic_handler)
-    
-    logger = logging.getLogger(__name__)        
-    logger.debug("Logger initialized")

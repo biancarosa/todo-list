@@ -12,11 +12,9 @@ services:
       - 5005:5000
     environment:
       DATABASE_URL: "postgresql://todolist_app:todolist_app@db:5432/todolist_app"
-      LOG_LEVEL: "DEBUG"
+      LOG_LEVEL: "INFO"
       NEW_RELIC_APP_NAME: "todolist-app"
-      NEW_RELIC_LOG: stdout
       NEW_RELIC_DISTRIBUTED_TRACING_ENABLED: true
-      NEW_RELIC_LOG_LEVEL: "finest"
     env_file:
       - .env
   db:

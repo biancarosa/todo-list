@@ -4,9 +4,9 @@ Module that starts the Flask application
 """
 import os
 import logging
-import newrelic
+import newrelic.agent
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 from app.logger import init_logger
@@ -17,6 +17,16 @@ def populate_db():
     for i in range(0,15000):
         task = models.Task(f"Task {i}")
         tasks_repository.save(task)
+
+def handle_bad_request(e):
+    return jsonify({"error": "BadRequest"}), 400
+    
+def handle_internal_server_error(e):
+    return jsonify({"error": "InternalServerError"}), 500
+
+
+newrelic.agent.initialize()
+newrelic.agent.register_application()
 
 # pylint: disable=C0103
 app = Flask(__name__)
@@ -29,9 +39,9 @@ from app.tasks import blueprint as tasks_blueprint
 app.register_blueprint(health_check_blueprint.create_blueprint())
 app.register_blueprint(tasks_blueprint.create_blueprint())
 
-newrelic.agent.initialize()
-newrelic.agent.register_application()
-        
+app.register_error_handler(400, handle_bad_request)
+app.register_error_handler(500, handle_internal_server_error)
+
 init_logger()
 logger = logging.getLogger(__name__)
 
@@ -41,3 +51,5 @@ try:
     populate_db()
 except Exception as e:
     logger.error(e)
+
+
