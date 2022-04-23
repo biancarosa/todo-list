@@ -11,12 +11,15 @@ logger = logging.getLogger(__name__)
 
 def create():
     """Creates tasks."""
-    try:
+    try:   
         json = request.get_json()
+        logger.info("Creating task", extra={"body": json})
         task = models.Task(json.get('description'))
         tasks_repository.save(task)
+        logger.info("Task created", extra={"task" : task})
         return jsonify(dict(task))
-    except:
+    except Exception as e:
+        logger.exception("Could not create task", {"exception": e})
         raise Exception("Could not create task")
 
 def list():
