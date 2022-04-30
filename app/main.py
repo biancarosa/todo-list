@@ -4,18 +4,12 @@ Module that starts the Flask application
 """
 import os
 import logging
-<<<<<<< HEAD
-import newrelic.agent
 
-from flask import Flask, jsonify
-
-=======
-from threading import Thread
-
->>>>>>> 5983227 (Async logging)
-import newrelic
 import asyncio
-from flask import Flask
+import newrelic
+import newrelic.agent
+from flask import Flask, jsonify
+from threading import Thread
 from flask_sqlalchemy import SQLAlchemy
 
 from app.logger import init_logger
@@ -46,23 +40,9 @@ db = SQLAlchemy(app)
 def main():
     from app.healthcheck import blueprint as health_check_blueprint
     from app.tasks import blueprint as tasks_blueprint
-<<<<<<< HEAD
-
-app.register_error_handler(400, handle_bad_request)
-app.register_error_handler(500, handle_internal_server_error)
-
-init_logger()
-logger = logging.getLogger(__name__)
-
-try:
-    logger.info('Creating db schema.')
-    db.create_all()
-    populate_db()
-except Exception as e:
-    logger.error(e)
-
-
-=======
+\
+    app.register_error_handler(400, handle_bad_request)
+    app.register_error_handler(500, handle_internal_server_error)
 
     app.register_blueprint(health_check_blueprint.create_blueprint())
     app.register_blueprint(tasks_blueprint.create_blueprint())
@@ -90,4 +70,3 @@ def log_emitter_thread(loop):
 
 if __name__ == 'app.main':
     main()
->>>>>>> 5983227 (Async logging)
