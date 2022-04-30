@@ -31,12 +31,13 @@ def patch():
     """Patches a task, changing the data object 
     only with the data passed on the request.
     Maintains attributes not sent to the API."""
-    tasks = []
-    for json in request.get_json():
-        task = tasks_repository.get(json.get('id'))
+    tasks_dict = { json.get('id') : { 'status' : json.get('status'), 'description': json.get('description')} for json in request.get_json()}
+    tasks = tasks_repository.get_many(tasks_dict.keys())
+    for task in tasks:
         logger.info(f"Updating task {task.id}")
+        json = tasks_dict.get(task.id)
         task.status = json.get('status', task.status)
         task.description =  json.get('description', task.description)
-        tasks.append(task)
     tasks_repository.bulk_save(tasks)
     return jsonify([dict(task) for task in tasks])
+
