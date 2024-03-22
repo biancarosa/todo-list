@@ -6,7 +6,7 @@
 #
 
 -i https://pypi.python.org/simple
-asgiref==3.5.0
+asgiref==3.8.1
 asyncio==3.4.3
 click==8.1.2; python_version >= '3.7'
 flask-sqlalchemy==2.5.1
